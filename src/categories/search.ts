@@ -1,3 +1,4 @@
+// assistance of chatgpt was used when debugging errors
 import _ from 'lodash';
 import privileges from '../privileges';
 import plugins from '../plugins';
@@ -8,7 +9,7 @@ interface CategoryData {
   parentCid: number;
   order: number;
   subCategoriesPerPage: number;
-  children?: CategoryData[]; // Use optional property
+  children?: CategoryData[];
 }
 
 interface SearchData {
@@ -41,8 +42,7 @@ export = function (Categories: Categories) {
         const query = data.query || '';
         const page = data.page || 1;
         const uid = data.uid || 0;
-        const paginate = data.paginate ?? true; // Use nullish coalescing operator
-
+        const paginate = data.hasOwnProperty('paginate') ? data.paginate : true;
         const startTime = process.hrtime();
 
         async function findCids(query: string, hardCap?: number): Promise<number[]> {

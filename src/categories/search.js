@@ -11,18 +11,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+// assistance of chatgpt was used when debugging errors
 const lodash_1 = __importDefault(require("lodash"));
 const privileges_1 = __importDefault(require("../privileges"));
 const plugins_1 = __importDefault(require("../plugins"));
 const database_1 = __importDefault(require("../database"));
 module.exports = function (Categories) {
     Categories.search = function (data) {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const query = data.query || '';
             const page = data.page || 1;
             const uid = data.uid || 0;
-            const paginate = (_a = data.paginate) !== null && _a !== void 0 ? _a : true; // Use nullish coalescing operator
+            const paginate = data.hasOwnProperty('paginate') ? data.paginate : true;
             const startTime = process.hrtime();
             function findCids(query, hardCap) {
                 return __awaiter(this, void 0, void 0, function* () {
